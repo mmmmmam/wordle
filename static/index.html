@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wordle</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
   </head>
   <body>
-    <header></header>
+    <header>
+      <div class="header-left">
+        <img src="asseats/menu.svg" />
+      </div>
+      <div class="header-title">
+        <h2>WORDLE</h2>
+      </div>
+      <div class="herder-right">
+        <img src="asseats/question.svg" />
+        <img src="asseats/chart.svg" />
+        <img src="asseats/setting.svg" />
+      </div>
+    </header>
     <main>
       <div id="timer">00:00</div>
       <div class="board-row row-0">
@@ -78,7 +92,7 @@
         <div class="keyboard-column" data-key="L">L</div>
       </div>
       <div class="keyboard-row row-2">
-        <div class="keyboard-column wide" data-key="ENTER">ENTER</div>
+        <div class="keyboard-column keyboard-enter" data-key="ENTER">ENTER</div>
         <div class="keyboard-column" data-key="Z">Z</div>
         <div class="keyboard-column" data-key="X">X</div>
         <div class="keyboard-column" data-key="C">C</div>
@@ -86,7 +100,9 @@
         <div class="keyboard-column" data-key="B">B</div>
         <div class="keyboard-column" data-key="N">N</div>
         <div class="keyboard-column" data-key="M">M</div>
-        <div class="keyboard-column wide" data-key="BACK"></div>
+        <div class="keyboard-column keyboard-backspace" data-key="BACK">
+          BACK
+        </div>
       </div>
     </footer>
     <script src="js/index.js"></script>

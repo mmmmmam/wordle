@@ -1,5 +1,3 @@
-const answer = "APPLE";
-
 let attempts = 0;
 let index = 0;
 let timer;
@@ -22,8 +20,19 @@ function appStart() {
     attempts += 1;
     index = 0;
   };
-  const handleEnterKey = () => {
+  const keyboardCheck = (inputWord) => {
+    const keyboardAnswer = document.querySelector(
+      `.keyboard-column[data-key='${inputWord}']`
+    );
+    keyboardAnswer.style = "background-color:#6aaa64; color:white;";
+  };
+
+  const handleEnterKey = async () => {
     let answerWordCnt = 0;
+    const response = await fetch("/answer");
+    const answerObject = await response.json();
+    const answer = answerObject.answer;
+
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-column[data-index='${attempts}${i}']`
@@ -33,6 +42,7 @@ function appStart() {
       if (inputWord === answerWord) {
         answerWordCnt += 1;
         block.style.background = "#6AAA64";
+        keyboardCheck(inputWord);
       } else if (answer.includes(inputWord)) {
         block.style.background = "#C9B458";
       } else block.style.background = "#787C7E";
@@ -67,6 +77,27 @@ function appStart() {
       index += 1;
     }
   };
+  const handleClick = (event) => {
+    const key = event.target.innerText;
+    const backspace = document.querySelector(
+      ".keyboard-column[data-key='BACK']"
+    );
+    const currentbox = document.querySelector(
+      `.board-column[data-index='${attempts}${index}']`
+    );
+    if (event.key === backspace) {
+      handleBackspace();
+    }
+    if (index === 5) {
+      if (key === "ENTER") {
+        handleEnterKey();
+      }
+      return;
+    } else {
+      currentbox.innerText = key;
+      index += 1;
+    }
+  };
   const startTimer = () => {
     const startTime = new Date();
 
@@ -82,6 +113,8 @@ function appStart() {
   };
 
   startTimer();
+  window.addEventListener("click", handleClick);
   window.addEventListener("keydown", handleKeydown);
 }
+
 appStart();
